@@ -1,29 +1,56 @@
 const express = require("express");
+const path = require("path");
+const PORT = process.env.PORT || 3001;
+const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const routes = require("./routes");
-const app = express();
-const PORT = process.env.PORT || 3001;
+const apiRouter = require("./routes/api");
+const loginRouter = require("./routes/login");
 
-// Configure body parser for AJAX requests
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 app.use(bodyParser.json());
-// Serve up static assets
-app.use(express.static("client/build"));
-// Add routes, both API and view
-app.use(routes);
+// connect to mongoose for an actual database login
+// Database configuration with mongoose
+mongoose.Promise = Promise;
+mongoose.connect("mongodb://localhost/mern");
+const db = mongoose.connection;
 
-// Set up promises with mongoose
-mongoose.Promise = global.Promise;
-// Connect to the Mongo DB
-mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/spotOn",
-  {
-    useMongoClient: true
-  }
-);
+// Show any mongoose errors
+db.on("error", function(error) {
+  console.log(`Mongoose Error: ${error}`);
+});
 
-// Start the API server
+// Once logged in to the db through mongoose, log a success message
+db.once("open", function() {
+  console.log("Mongoose connection successful.");
+});
+
+
+// Serve up static assets (usually on heroku)
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+
+// connect our API router with the
+// application - these are protected by our
+// JWT!
+app.use(loginRouter);
+app.use("/api", apiRouter);
+
+// Send every request to the React app
+// Define any API routes before this runs
+
+// app.get("/fanta", function(req, res) {
+//   res.sendFile(path.join(__dirname, "./client/build/index.html"));
+// });
+
+
+app.get("*", function(req, res) {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+});
+
 app.listen(PORT, function() {
-  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
+  console.log(`🌎 ==> Server now on port ${PORT}!`);
 });

@@ -1,15 +1,13 @@
 {
   "name": "mern",
   "version": "1.0.0",
-  "description": "",
+  "description": "Mern Demo",
   "main": "server.js",
   "scripts": {
     "server": "node server.js",
-    "client": "cd client && npm run start",
-    "start": "./node_modules/.bin/concurrently \"./node_modules/.bin/nodemon\" \"npm run client\"",
-    "build": "cd client && npm run build",
-    "deploy": "npm run build && git add . && git commit -m \"Building for production\" && git push heroku master",
-    "seed": "node scripts/seedDB",
+    "client": "node scripts/start-client.js",
+    "start": "concurrently \"nodemon server.js --debug\" \"npm run client\"",
+    "build": "node scripts/build.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -19,10 +17,9 @@
     "nodemon": "^1.11.0"
   },
   "dependencies": {
-    "axios": "^0.16.2",
-    "body-parser": "^1.17.2",
+    "body-parser": "^1.18.2",
     "express": "^4.15.4",
-    "mongoose": "^4.11.7",
-    "react-router-dom": "^4.1.2"
+    "jsonwebtoken": "^8.0.1",
+    "mongoose": "^4.12.0"
   }
 }
