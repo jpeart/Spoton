@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 // connect to mongoose for an actual database login
 // Database configuration with mongoose
 mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/mern");
+mongoose.connect("mongodb://localhost/mern1");
 const db = mongoose.connection;
 
 // Show any mongoose errors
