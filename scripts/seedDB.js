@@ -3,7 +3,7 @@ const db = require("../models");
 mongoose.Promise = global.Promise;
 
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/mern1",
+  process.env.MONGODB_URI || "mongodb://heroku_plj4bc0k:r5fifdea9tm6og50k3iajreio7@ds119598.mlab.com:19598/heroku_plj4bc0k",
   {
     useMongoClient: true
   }
