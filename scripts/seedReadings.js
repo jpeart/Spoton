@@ -10,20 +10,16 @@ mongoose.connect(
 );
 
 var SugarSeed = [];
-const UserSeed = [{username: "Wilfred Brimley", password: "wb"},
-			{username: "Danny Dorito", password: "dd"},
-			{username: "Don Frito", password: "df"}];
 
 //Wilfred Brimley  perfect
 var	min = 80;
 var	max = 180;
 var days = 7;
 var tests = 8;
-var temp = {username: "", time: "", category: "", usertime: "", usertime: "", reading: 0, note:"", carbs:0, bolus: 0};
 for(i=0; i<days; i++){
 	for(j=0; j<tests; j++)
 	{
-
+		var temp = {username: "", time: "", category: "", usertime: "", usertime: "", reading: 0, note:"", carbs:0, bolus: 0};
 		temp.username = "Wilfred Brimley";
 	    temp.time = Date.now();
 
@@ -67,11 +63,10 @@ for(i=0; i<days; i++){
 //Danny Dorito	Tendencies to go high after eating
 min = 40;
 max = 280;
-var temp = {username: "", time: "", category: "", usertime: "", usertime: "", reading: 0, note:"", carbs:0, bolus: 0};
 for(i=0; i<days; i++){
 	for(j=0; j<tests; j++)
 	{
-
+		var temp = {username: "", time: "", category: "", usertime: "", usertime: "", reading: 0, note:"", carbs:0, bolus: 0};
 		temp.username = "Danny Dorito";
 	    temp.time = Date.now();
 
@@ -116,10 +111,10 @@ for(i=0; i<days; i++){
 //Don Cheeto 		Tendencies to go high near bedtime
 min = 20;
 max = 370;
-var temp = {username: "", time: "", category: "", usertime: "", usertime: "", reading: 0, note:"", carbs:0, bolus: 0};
 for(i=0; i<days; i++){
 	for(j=0; j<tests; j++)
 	{
+		var temp = {username: "", time: "", category: "", usertime: "", usertime: "", reading: 0, note:"", carbs:0, bolus: 0};
 		temp.username = "Don Cheeto";
 	    temp.time = Date.now();
 
@@ -164,21 +159,9 @@ for(i=0; i<days; i++){
 		SugarSeed.push(temp);
 	}
 }
-
 db.Readings
   .remove({})
   .then(() => db.Readings.collection.insertMany(SugarSeed))
-  .then(data => {
-    console.log(data.insertedIds.length + " records inserted!");
-    process.exit(0);
-  })
-  .catch(err => {
-    console.error(err);
-    process.exit(1);
-  });
- db.User
-  .remove({})
-  .then(() => db.User.collection.insertMany(UserSeed))
   .then(data => {
     console.log(data.insertedIds.length + " records inserted!");
     process.exit(0);
