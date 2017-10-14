@@ -1,36 +1,3 @@
-// const mongoose = require("mongoose");
-// const db = require("../models");
-// mongoose.Promise = global.Promise;
-//
-// // This file empties the Books collection and inserts the books below
-//
-// mongoose.connect(
-//   process.env.MONGODB_URI || "mongodb://localhost/mern",
-//   {
-//     useMongoClient: true
-//   }
-// );
-//
-// const userSeed = [
-//   {
-//     username: "joe",
-//     password: "123"
-//   }
-// ];
-//
-// db.User
-//   .remove({})
-//   .then(() => db.User.collection.insertMany(userSeed))
-//   .then(data => {
-//     console.log(data.insertedIds.length + " records inserted!");
-//     process.exit(0);
-//   })
-//   .catch(err => {
-//     console.error(err);
-//     process.exit(1);
-//   });
-
-
 const mongoose = require("mongoose");
 const db = require("../models");
 mongoose.Promise = global.Promise;
@@ -139,6 +106,7 @@ for(i=0; i<days; i++){
 		if(temp.category == "breakfast" || temp.category == "lunch" || temp.category == "dinner"){
 			temp.carbs = 60;
 			temp.bolus = 10;
+			temp.reading = Math.floor(Math.random() * (330 - 190)) + 190;
 			}
 		else{
 			temp.carbs = 0;
@@ -191,6 +159,8 @@ for(i=0; i<days; i++){
 			temp.carbs = 0;
 			temp.bolus = 0;
 		}
+		if(temp.category == "bedtime")
+			temp.reading = Math.floor(Math.random() * (150 - 300)) + 150;
 		SugarSeed.push(temp);
 	}
 }
