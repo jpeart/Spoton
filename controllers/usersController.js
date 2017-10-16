@@ -1,6 +1,6 @@
 const db = require("../models");
 
-// Defining methods for the booksController
+// Defining methods for the controller
 module.exports = {
   findById: function(req, res) {
     db.User
