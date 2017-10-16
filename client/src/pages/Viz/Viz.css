@@ -1,9 +1,9 @@
 .viz-container {
     margin:0 auto;
     border:1px solid;
-    width: 960px;
+    width: 975px;
     padding: 20px 0px;
-    background-color:gray;
+    margin-top: 40px;
 }
 
 svg {

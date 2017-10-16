@@ -50,6 +50,7 @@ class SVGChart extends React.Component {
  
     //Create the element
     const div = new ReactFauxDOM.Element('div')
+    div.setAttribute('class', 'viz-container')
      
     //Pass it to d3.select and proceed as normal
     let svg = d3.select(div).append("svg")
@@ -101,32 +102,5 @@ class SVGChart extends React.Component {
   }
  
 }
-/*import React from 'react';
-import node from './Vizd3';
-import rd3 from 'react-d3-library';
-import './Viz.css'
 
-const RD3Component = rd3.Component;
-
-class Viz1 extends React.Component {
-  
-   constructor(props) {
-     super(props);
-     this.state = {d3: ''}
-   }
-  
-   componentDidMount() {
-     this.setState({d3: node});
-   }
-  
-   render() {
-     return (
-       <div>
-         <RD3Component data={this.state.d3} />
-       </div>
-       
-     )
-   }
- };
-*/
 export default SVGChart;

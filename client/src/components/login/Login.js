@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Input, FormBtn, Select } from "../../components/Form";
+import { Button } from 'reactstrap';
 import './Login.css';
 
 export default class Login extends React.Component {
@@ -58,7 +59,8 @@ export default class Login extends React.Component {
                 <form className="form">
                     <Input name="username" value={this.state.username} onChange={this.handleInputChange} placeholder="Username" />
                     <Input type="password" name="password" value={this.state.password} onChange={this.handleInputChange} placeholder="Password" />
-                    <FormBtn onClick={this.handleFormSubmit}>Submit</FormBtn>
+                    <Button onClick={this.submitForm} color="danger">Log In</Button>
+                    <div><a href="/login">[ TEMP LOGIN LINK ]</a></div>
                 </form>
             </div>
         );

@@ -25,3 +25,20 @@
 li.react-datepicker__time-list-item {
     padding: 5px;
 }
+
+.nav-container{
+    margin: 20px auto;
+    width:  400px;
+}
+
+.nav-item{
+    display: inline;
+}
+
+.rm-20 {
+    margin-right: 20px;
+}
+
+h2 {
+    color: #686868;
+}

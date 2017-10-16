@@ -20,11 +20,10 @@ export default class NavClass extends React.Component {
 
   render() {
     return (
-      <div className="nav-container">
-        
+      <div className="nav-container">        
           <Nav pills>
-            <NavItem>
-              <NavLink href="#" active>Add Reading</NavLink>
+            <NavItem color="danger">
+              <NavLink href="/inputform" active>Add Reading</NavLink>
             </NavItem>
             <NavDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
               <DropdownToggle nav caret>
