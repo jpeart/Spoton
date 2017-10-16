@@ -1,26 +1,28 @@
 import React, { Component } from "react";
-import DeleteBtn from "../../components/DeleteBtn";
-import SaveBtn from "../../components/SaveBtn";
+//import DeleteBtn from "../../components/DeleteBtn";
+//import SaveBtn from "../../components/SaveBtn";
 //import API from "../../utils/API";
-import { Col, Row, Container } from "../../components/Grid";
-import { List, ListItem } from "../../components/List";
-import { Input, FormBtn, Select } from "../../components/Form";
+//import { Col, Row, Container } from "../../components/Grid";
+//import { List, ListItem } from "../../components/List";
+import { Input, FormBtn } from "../../components/Form";
 //import helpers from '../../utils/helpers';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
- 
+import { Button, Form, FormGroup, Label, FormText, Col, Row, Container } from 'reactstrap';
+import 'bootstrap/dist/css/bootstrap.css';
 import 'react-datepicker/dist/react-datepicker.css';
-// a select with dynamically created options
-const options = ["Wake", "Breakfast", "One hour after breakfast", "Lunch", "One hour after lunch", "Dinner", "One hour after dinner", "Bed", "Prior to workout", "Post workout", "Snack", "One hour after snack", "Felt low", "Felt high", "Miscellaneous"];
+import './InputFormGroup.css';
 
-class MainLayout extends Component {
+// Select Options
+const options = ["Make a selection:", "Wake", "Breakfast", "One hour after breakfast", "Lunch", "One hour after lunch", "Dinner", "One hour after dinner", "Bed", "Prior to workout", "Post workout", "Snack", "One hour after snack", "Felt low", "Felt high", "Miscellaneous"];
+
+class InputFormGroup extends Component {
   state = {
     books: [],
     title: "",
     url: "",
     results: [],
     searchTerm: "",
-    searchOptions: ["Select an Option", "First Option", "Second Option", "Third Option"]
   };
 
   constructor (props) {
@@ -31,18 +33,10 @@ class MainLayout extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-
-
   onChange(e) {
     this.setState({
       value: e.target.value
     })
-  }
-
-  handleChange(date) {
-    this.setState({
-      startDate: date
-    });
   }
 
   // LIFECYCLE EVENT
@@ -64,6 +58,7 @@ class MainLayout extends Component {
     });
   }
 
+
   handleFormSubmit = event => {
     event.preventDefault();
     console.log("Date:" + this.state.dateTime);
@@ -79,26 +74,26 @@ class MainLayout extends Component {
   render() {
     
     return (
-      <Container fluid>
-        <Row>
-          <form>
-      <div className="form-group">
-          <DatePicker
+      <div className="form-group-container">
+      <Form>
+      <FormGroup>
+          <DatePicker form-group
           name="dateTime"
           selected={this.state.dateTime}
           onChange={this.handleChange}
           showTimeSelect
+          timeIntervals={15}
           dateFormat="LLL"
           />
-        </div>
+      </FormGroup>
 
-      <div className="form-group">
+      <FormGroup>
         <select value={this.state.value} onChange={this.handleInputChange} className="form-control" name="category">
         {options.map(option => {
           return <option value={option} key={option} >{option}</option>
         })}
       </select>
-      </div>
+      </FormGroup>
             <Input
               value={this.state.reading}
               onChange={this.handleInputChange}
@@ -123,13 +118,11 @@ class MainLayout extends Component {
             >
               Add
             </FormBtn>
-          </form>
-          <hr />
-        </Row>
-      </Container>
+          </Form>
+        </div>
     );
   }
 }
 
-export default MainLayout;
+export default InputFormGroup;
 

@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import { Input, FormBtn, Select } from "../../components/Form";
+import './Login.css';
 
 export default class Login extends React.Component {
     constructor(props) {
@@ -52,11 +54,11 @@ export default class Login extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="login-container">
                 <form className="form">
-                    <input name="username" value={this.state.username} onChange={this.handleInputChange}/>
-                    <input type="password" name="password" value={this.state.password} onChange={this.handleInputChange}/>
-                    <button onClick={this.submitForm}>LOGIN</button>
+                    <Input name="username" value={this.state.username} onChange={this.handleInputChange} placeholder="Username" />
+                    <Input type="password" name="password" value={this.state.password} onChange={this.handleInputChange} placeholder="Password" />
+                    <FormBtn onClick={this.handleFormSubmit}>Submit</FormBtn>
                 </form>
             </div>
         );
