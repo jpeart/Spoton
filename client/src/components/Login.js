@@ -34,8 +34,11 @@ export default class Login extends React.Component {
             // we display log the token to the console. /api/users is a protected
             // route and we can test this in postman to confirm whether or not
             // we need a token!
-            instance.get('/api/users').then(response=>console.log(response.data)).catch(err=>console.log(err));
-            instance.get('/api/users/' + this.state.username).then(response=>console.log(response.data)).catch(err=>console.log(err))
+            // instance.get('/api/users').then(response=>console.log(response.data)).catch(err=>console.log(err));
+            instance
+            .get('/api/users/' + this.state.username)
+            .then(response=>console.log(response.data))
+            .catch(err=>console.log(err))
             // instance.get('/api/users').then(response=>console.log(response.data)).catch(err=>console.log(err));
         })
         .catch(error=> {
