@@ -1,19 +1,29 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import InputFormGroup from "./pages/InputFormGroup";
 import './App.css';
-import Login from './components/Login';
+import Login from './components/Login/Login';
+import logo from './SpotOnLogo.svg';
+import logotext from './SpotOnText.svg';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+      <Router>
+        <div className="App">
+          <div className="App-header">
+            <img src={logo} className="App-logo" alt="logo" />
+            <img src={logotext} className="App-logo-text" alt="logo-text" />  
+          </div>
+          <Switch>
+            <Route exact path="/" component={Login} />
+            <Route exact path="/login" component={InputFormGroup} />
+          </Switch>
         </div>
-        <Login className="App-intro"/>
-      </div>
+      </Router>
     );
   }
 }
 
 export default App;
+
