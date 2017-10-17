@@ -1,0 +1,36 @@
+.viz-container {
+    margin:0 auto;
+    border:1px solid;
+    width: 975px;
+    padding: 20px 0px;
+    margin-top: 40px;
+}
+
+svg {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+clipPath {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges
+}
+
+.bar {
+  fill: steelblue;
+}
+
+.bar:hover {
+  fill: brown;
+}
+
+.axis--x path {
+  display: none;
+}
