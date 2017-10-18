@@ -14,8 +14,6 @@ const tokenCheck = (req, res, next)=>{
         // Bearer xxxx.yyy.zzzz
         // then assign it to the value on the req for our route to see!
         const token = authHeader.split(" ")[1];
-        console.log(token);
-        console.log(secret_key);
         jwt.verify(token, secret_key, (err, data) => {
             if(err) {
                 res.sendStatus(403);

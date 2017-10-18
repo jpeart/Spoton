@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Input, FormBtn, Select } from "../../components/Form";
 import { Button } from 'reactstrap';
 import './Login.css';
+import logo from '../../SpotOnLogo.svg';
+import logotext from '../../SpotOnText.svg';
 
 export default class Login extends React.Component {
     constructor(props) {
@@ -60,6 +62,8 @@ export default class Login extends React.Component {
         return (
             <div className="login-container">
                 <form className="form">
+                  <img src={logo} className="App-logo" alt="logo" />
+                  <img src={logotext} className="App-logo-text" alt="logo-text" />
                     <Input name="username" value={this.state.username} onChange={this.handleInputChange} placeholder="Username" />
                     <Input type="password" name="password" value={this.state.password} onChange={this.handleInputChange} placeholder="Password" />
                     <Button onClick={this.submitForm} color="danger">Log In</Button>
