@@ -22,6 +22,11 @@ router.use(tokenCheck);
   router
     .route("/users/:id")
     .get(usersController.findById)
+    .post(usersController.insertReading)
+    //.post(usersController.InsertReading, function(req, res){});
+    
+
+    // .put(usersController.create)
     //.delete(usersController.remove);
     //.put(usersController.update)
 
