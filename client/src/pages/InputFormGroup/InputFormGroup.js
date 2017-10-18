@@ -16,11 +16,8 @@ import './InputFormGroup.css';
 import SVGChart from '../Viz/Viz1.js';
 import SVGChart2 from '../Viz/Viz2.js';
 import glucosedataimport from '../Viz/glucoseData.json'
-<<<<<<< HEAD
 import glucosedataimport2 from '../Viz/glucoseData2.json'
-=======
 import axios from 'axios';
->>>>>>> master
 
 // Select Options
 const options = ["Make a selection:", "Wake", "Breakfast", "One hour after breakfast", "Lunch", "One hour after lunch", "Dinner", "One hour after dinner", "Bed", "Prior to workout", "Post workout", "Snack", "One hour after snack", "Felt low", "Felt high", "Miscellaneous"];
@@ -199,7 +196,6 @@ class InputFormGroup extends Component {
               Dashboards
             </DropdownToggle>
             <DropdownMenu>
-<<<<<<< HEAD
               <DropdownItem onClick={this.viz1Visible}>Dashboard #1</DropdownItem>
               <DropdownItem onClick={this.viz2Visible}>Dashboard #2</DropdownItem>               
             </DropdownMenu>
@@ -216,17 +212,6 @@ class InputFormGroup extends Component {
             : null
         }
 
-=======
-              <DropdownItem>Dashboard #1</DropdownItem>
-              <DropdownItem>Dashboard #2</DropdownItem>
-              <DropdownItem>Dashboard #3</DropdownItem>
-              <DropdownItem>Dashboard #4</DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
-    </div>
-
-    <SVGChart data={testdata} width={testwidth} height={testheight}/>
->>>>>>> master
     <div>
           <Modal isOpen={this.state.modal} toggle={this.modalToggle} className={this.props.className}>
           <ModalHeader toggle={this.modalToggle}>Readings Entry</ModalHeader>
