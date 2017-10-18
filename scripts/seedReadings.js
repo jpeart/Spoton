@@ -10,9 +10,6 @@ mongoose.connect(
 );
 
 var SugarSeed = [];
-const UserSeed = [{username: "Wilfred Brimley", password: "wb"},
-			{username: "Danny Dorito", password: "dd"},
-			{username: "Don Frito", password: "df"}];
 
 //Wilfred Brimley  perfect
 var	min = 80;
@@ -160,17 +157,6 @@ for(i=0; i<days; i++){
 db.Readings
   .remove({})
   .then(() => db.Readings.collection.insertMany(SugarSeed))
-  .then(data => {
-    console.log(data.insertedIds.length + " records inserted!");
-    process.exit(0);
-  })
-  .catch(err => {
-    console.error(err);
-    process.exit(1);
-  });
- db.User
-  .remove({})
-  .then(() => db.User.collection.insertMany(UserSeed))
   .then(data => {
     console.log(data.insertedIds.length + " records inserted!");
     process.exit(0);
