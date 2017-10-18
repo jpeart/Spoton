@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactFauxDOM from 'react-faux-dom'
 import * as d3 from 'd3'
-import './Viz.css';
+import './Viz1.css';
  
 class SVGChart extends React.Component {
  
@@ -12,8 +12,8 @@ class SVGChart extends React.Component {
     let margin = {top: 20, right: 20, bottom: 30, left: 40},
       width = this.props.width - margin.left - margin.right,
       height = this.props.height - margin.top - margin.bottom;
-    console.log(width);
-    console.log(height);
+    //console.log(width);
+    //console.log(height);
  
     //var x = d3.time.scale()
     let x = d3.scaleLinear()
@@ -89,10 +89,20 @@ class SVGChart extends React.Component {
   svg.append("g")
       .attr("class", "y axis")
       .call(yAxis);
-  
+      
+  svg.append("g")
+      .call(d3.axisLeft(y))
+      .append("text")
+      .attr("fill", "#000")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", "0.71em")
+      .attr("text-anchor", "end")
+      .text("mg/dl");
+      
   svg.append("text")
       .attr("x", (width / 2))             
-      .attr("y", (height / 8))
+      .attr("y", (height / 12))
       .attr("text-anchor", "middle")  
       .style("font-size", "24px") 
       .text("Glucose Heatmap by Time of Day");
