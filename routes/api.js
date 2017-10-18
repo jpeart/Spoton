@@ -23,7 +23,7 @@ router.use(tokenCheck);
     .route("/users/:id")
     .get(usersController.findById)
     //.delete(usersController.remove);
-
+    .put(usersController.update)
 
 
 module.exports = router;
