@@ -22,8 +22,13 @@ router.use(tokenCheck);
   router
     .route("/users/:id")
     .get(usersController.findById)
-    //.delete(usersController.remove);
+    .post(usersController.insertReading)
+    //.post(usersController.InsertReading, function(req, res){});
+    
 
+    // .put(usersController.create)
+    //.delete(usersController.remove);
+    //.put(usersController.update)
 
 
 module.exports = router;

@@ -3,6 +3,11 @@ import axios from 'axios';
 import { Input, FormBtn, Select } from "../../components/Form";
 import { Button } from 'reactstrap';
 import './Login.css';
+import logo from '../../SpotOnLogo.svg';
+import logotext from '../../SpotOnText.svg';
+//import { Link } from "react-router-dom";
+import { Redirect } from 'react-router';
+
 
 export default class Login extends React.Component {
     constructor(props) {
@@ -38,10 +43,13 @@ export default class Login extends React.Component {
             // route and we can test this in postman to confirm whether or not
             // we need a token!
             // instance.get('/api/users').then(response=>console.log(response.data)).catch(err=>console.log(err));
-            instance
-            .get('/api/users/' + this.state.username)
-            .then(response=>console.log(response.data))
-            .catch(err=>console.log(err))
+            //instance
+            //.get('/api/users/' + this.state.username)
+            //.then(response=>console.log(response.data))
+            //.then(this.setState({redirect: true}))
+
+            this.setState({redirect: true})
+            //.catch(err=>console.log(err))
             // instance.get('/api/users').then(response=>console.log(response.data)).catch(err=>console.log(err));
         })
         .catch(error=> {
@@ -57,15 +65,23 @@ export default class Login extends React.Component {
     }
 
     render() {
+      if (this.state.redirect) {
+        return <Redirect push to={"/users/" + this.state.username}/>;
+      } else {
         return (
             <div className="login-container">
                 <form className="form">
+                  <img src={logo} className="App-logo" alt="logo" />
+                  <img src={logotext} className="App-logo-text" alt="logo-text" />
                     <Input name="username" value={this.state.username} onChange={this.handleInputChange} placeholder="Username" />
                     <Input type="password" name="password" value={this.state.password} onChange={this.handleInputChange} placeholder="Password" />
-                    <Button onClick={this.submitForm} color="danger">Log In</Button>
+                    <Button onClick={this.submitForm} color="danger">
+                    Log In
+                    </Button>
                     <div><a href="/login">[ TEMP LOGIN LINK ]</a></div>
                 </form>
             </div>
         );
+      }
     }
 }

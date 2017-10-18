@@ -10,22 +10,19 @@ mongoose.connect(
 );
 
 var SugarSeed = [];
-
 const UserSeed = [{username: "Wilfred Brimley", password: "wb"},
 			{username: "Danny Dorito", password: "dd"},
 			{username: "Don Frito", password: "df"}];
 
-
 //Wilfred Brimley  perfect
 var	min = 80;
 var	max = 180;
-var days = 7
+var days = 7;
 var tests = 8;
-var temp = {username: "", time: "", category: "", usertime: "", usertime: "", reading: 0, note:"", carbs:0, bolus: 0};
 for(i=0; i<days; i++){
 	for(j=0; j<tests; j++)
 	{
-
+		var temp = {username: "", time: "", category: "", reading: 0, note:"", carbs:0, bolus: 0};
 		temp.username = "Wilfred Brimley";
 	    temp.time = Date.now();
 
@@ -46,14 +43,12 @@ for(i=0; i<days; i++){
 		if(j==7)
 			temp.category = "bedtime"
 
-		temp.usertime = Date.now();
-
 		min = Math.ceil(min);
 		max = Math.floor(max);
 
 		temp.reading = Math.floor(Math.random() * (max - min)) + min;
 
-		temp.note = "Test "+j+" of Day "+i;
+		temp.note = "Test "+(j+1)+" of Day "+(i+1);
 
 		if(temp.category == "breakfast" || temp.category == "lunch" || temp.category == "dinner"){
 			temp.carbs = 60;
@@ -69,11 +64,10 @@ for(i=0; i<days; i++){
 //Danny Dorito	Tendencies to go high after eating
 min = 40;
 max = 280;
-var temp = {username: "", time: "", category: "", usertime: "", usertime: "", reading: 0, note:"", carbs:0, bolus: 0};
 for(i=0; i<days; i++){
 	for(j=0; j<tests; j++)
 	{
-
+		var temp = {username: "", time: "", category: "", reading: 0, note:"", carbs:0, bolus: 0};
 		temp.username = "Danny Dorito";
 	    temp.time = Date.now();
 
@@ -94,14 +88,12 @@ for(i=0; i<days; i++){
 		if(j==7)
 			temp.category = "bedtime"
 
-		temp.usertime = Date.now();
-
 		min = Math.ceil(min);
 		max = Math.floor(max);
 
 		temp.reading = Math.floor(Math.random() * (max - min)) + min;
 
-		temp.note = "Test "+j+" of Day "+i;
+		temp.note = "Test "+(j+1)+" of Day "+(i+1);
 
 		if(temp.category == "breakfast" || temp.category == "lunch" || temp.category == "dinner"){
 			temp.carbs = 60;
@@ -118,10 +110,10 @@ for(i=0; i<days; i++){
 //Don Cheeto 		Tendencies to go high near bedtime
 min = 20;
 max = 370;
-var temp = {username: "", time: "", category: "", usertime: "", usertime: "", reading: 0, note:"", carbs:0, bolus: 0};
 for(i=0; i<days; i++){
 	for(j=0; j<tests; j++)
 	{
+		var temp = {username: "", time: "", category: "", reading: 0, note:"", carbs:0, bolus: 0};
 		temp.username = "Don Cheeto";
 	    temp.time = Date.now();
 
@@ -142,14 +134,12 @@ for(i=0; i<days; i++){
 		if(j==7)
 			temp.category = "bedtime"
 
-		temp.usertime = Date.now();
-
 		min = Math.ceil(min);
 		max = Math.floor(max);
 
 		temp.reading = Math.floor(Math.random() * (max - min)) + min;
 
-		temp.note = "Test "+j+" of Day "+i;
+		temp.note = "Test "+(j+1)+" of Day "+(i+1);
 
 		if(temp.category == "breakfast" || temp.category == "lunch" || temp.category == "dinner"){
 			temp.carbs = 60;
@@ -161,6 +151,8 @@ for(i=0; i<days; i++){
 		}
 		if(temp.category == "bedtime")
 			temp.reading = Math.floor(Math.random() * (150 - 300)) + 150;
+
+		
 		SugarSeed.push(temp);
 	}
 }

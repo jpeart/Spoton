@@ -12,12 +12,12 @@ class App extends Component {
       <Router>
         <div className="App">
           <div className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <img src={logotext} className="App-logo-text" alt="logo-text" />  
+            {/* <img src={logo} className="App-logo" alt="logo" />
+            <img src={logotext} className="App-logo-text" alt="logo-text" />   */}
           </div>
           <Switch>
             <Route exact path="/" component={Login} />
-            <Route exact path="/login" component={InputFormGroup} />
+            <Route exact path="/users/:id" component={InputFormGroup} user="Wilfred Brimley"/>
           </Switch>
         </div>
       </Router>
@@ -26,4 +26,3 @@ class App extends Component {
 }
 
 export default App;
-

@@ -16,7 +16,11 @@ import './InputFormGroup.css';
 import SVGChart from '../Viz/Viz1.js';
 import SVGChart2 from '../Viz/Viz2.js';
 import glucosedataimport from '../Viz/glucoseData.json'
+<<<<<<< HEAD
 import glucosedataimport2 from '../Viz/glucoseData2.json'
+=======
+import axios from 'axios';
+>>>>>>> master
 
 // Select Options
 const options = ["Make a selection:", "Wake", "Breakfast", "One hour after breakfast", "Lunch", "One hour after lunch", "Dinner", "One hour after dinner", "Bed", "Prior to workout", "Post workout", "Snack", "One hour after snack", "Felt low", "Felt high", "Miscellaneous"];
@@ -32,6 +36,15 @@ const testwidth = 960;
 const testheight = 500;
 
 class InputFormGroup extends Component {
+  componentDidMount() {
+    //console.log("hello");
+    // Jordan: Attach appropriate username to header
+    var usr = this.props.location.pathname
+    var usrName = usr.substring(7,(usr.length));
+    //console.log(usrName + " attached to header");
+    document.getElementById("userheader").innerHTML = "User: "+usrName;
+    this.getInstance();
+  }
   state = {
     books: [],
     title: "",
@@ -62,6 +75,26 @@ class InputFormGroup extends Component {
     });
   }
 
+
+
+
+
+  getInstance() {
+    const token = localStorage.getItem('token');
+    var instance = axios.create({
+        headers: {'Authorization': `Bearer ${token}`}
+    });
+    //console.log(instance);
+    var usr = this.props.location.pathname
+    var usrQuery = usr.substring(7,(usr.length));
+    //console.log(usrQuery);
+    instance
+      .get('/api/users/' + usrQuery)
+      .then(response=>console.log(response.data))
+  }
+
+
+
   modalToggle() {
     this.setState({
       modal: !this.state.modal
@@ -89,9 +122,6 @@ class InputFormGroup extends Component {
   }
 
   // LIFECYCLE EVENT
-  componentDidMount() {
-    
-  }
 
   // EVENTS
   handleInputChange = event => {
@@ -110,11 +140,38 @@ class InputFormGroup extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    console.log("Date:" + this.state.dateTime);
-    console.log("Category:" + this.state.category);
-    console.log("Reading:" + this.state.reading);
-    console.log("Carbs:" + this.state.carbs);
-    console.log("Bolus:" + this.state.bolus);
+    // console.log("Date:" + this.state.dateTime);
+    // console.log("Category:" + this.state.category);
+    // console.log("Reading:" + this.state.reading);
+    // console.log("Carbs:" + this.state.carbs);
+    // console.log("Bolus:" + this.state.bolus);
+
+    //create reading object
+    var temp = { username: "", time: "", category: "", reading: 0, note: "", carbs: 0, bolus: 0 };
+
+    // jordan: make the api call here
+    const token = localStorage.getItem('token');
+    var instance = axios.create({
+        headers: {'Authorization': `Bearer ${token}`}
+    });
+
+    var usr = this.props.location.pathname
+    var usrQuery = usr.substring(7,(usr.length));
+
+    //populate reading with data from form / URL
+    temp.username = usrQuery;
+    temp.time = this.state.dateTime;
+    temp.category = this.state.category;
+    temp.reading = this.state.reading;
+    temp.carbs = this.state.carbs;
+    temp.bolus = this.state.bolus;
+
+    // make the api call
+    instance
+      //.post('/api/users/' + usrQuery, function(req, res){res.send(temp)})
+      .post('/api/users/'+usrQuery, temp)
+      .then(response=>console.log(response.data))
+
     this.modalToggle();
     this.setState({
       dateTime: moment(),
@@ -124,16 +181,17 @@ class InputFormGroup extends Component {
       bolus: ""
   })
 };
-   
+
 
 
   //LIFECYCLE EVENT
+  // jordan: Gave h2 an ID and manipulate it in ComponentDidMount();
   render() {
-    
+
     return (
       <div>
-        <h2>User: Don Frito</h2>
-        <div className="nav-container">        
+        <h2 id="userheader">User: Don Frito</h2>
+        <div className="nav-container">
 
           <Button color="danger" onClick={this.modalToggle} className="nav-item rm-20">Add Reading</Button>
           <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle} className="nav-item" outline>
@@ -141,6 +199,7 @@ class InputFormGroup extends Component {
               Dashboards
             </DropdownToggle>
             <DropdownMenu>
+<<<<<<< HEAD
               <DropdownItem onClick={this.viz1Visible}>Dashboard #1</DropdownItem>
               <DropdownItem onClick={this.viz2Visible}>Dashboard #2</DropdownItem>               
             </DropdownMenu>
@@ -157,6 +216,17 @@ class InputFormGroup extends Component {
             : null
         }
 
+=======
+              <DropdownItem>Dashboard #1</DropdownItem>
+              <DropdownItem>Dashboard #2</DropdownItem>
+              <DropdownItem>Dashboard #3</DropdownItem>
+              <DropdownItem>Dashboard #4</DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+    </div>
+
+    <SVGChart data={testdata} width={testwidth} height={testheight}/>
+>>>>>>> master
     <div>
           <Modal isOpen={this.state.modal} toggle={this.modalToggle} className={this.props.className}>
           <ModalHeader toggle={this.modalToggle}>Readings Entry</ModalHeader>
@@ -212,4 +282,3 @@ class InputFormGroup extends Component {
 }
 
 export default InputFormGroup;
-
