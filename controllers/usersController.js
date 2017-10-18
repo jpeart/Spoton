@@ -4,9 +4,22 @@ const db = require("../models");
 module.exports = {
   findById: function(req, res) {
   db.Readings
-    .findOne({username: req.params.id})
+    .find({username: req.params.id})
     //.then(console.log(req.params.id))
     .then(dbModel => res.json(dbModel))
     .catch(err => res.status(422).json(err));
+  },
+  insertReading: function(req,res){
+    //console.log(req.body);
+  	db.Readings
+  	.create(req.body)
+  	.then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
   }
+  // create: function(req, res) {
+  //   db.Readings
+  //     .create(req.body)
+  //     .then(dbModel => res.json(dbModel))
+  //     .catch(err => res.status(422).json(err));
+  // }
 };
