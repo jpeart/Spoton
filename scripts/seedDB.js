@@ -44,8 +44,6 @@ for(i=0; i<days; i++){
 		if(j==7)
 			temp.category = "bedtime"
 
-		temp.usertime = Date.now();
-
 		min = Math.ceil(min);
 		max = Math.floor(max);
 
@@ -92,8 +90,6 @@ for(i=0; i<days; i++){
 		if(j==7)
 			temp.category = "bedtime"
 
-		temp.usertime = Date.now();
-
 		min = Math.ceil(min);
 		max = Math.floor(max);
 
@@ -139,8 +135,6 @@ for(i=0; i<days; i++){
 			temp.category = "afterdinner"
 		if(j==7)
 			temp.category = "bedtime"
-
-		temp.usertime = Date.now();
 
 		min = Math.ceil(min);
 		max = Math.floor(max);
