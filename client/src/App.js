@@ -17,7 +17,7 @@ class App extends Component {
           </div>
           <Switch>
             <Route exact path="/" component={Login} />
-            <Route exact path="/login" component={InputFormGroup} />
+            <Route exact path="/users/:id" component={InputFormGroup} />
           </Switch>
         </div>
       </Router>

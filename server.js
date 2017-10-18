@@ -14,7 +14,9 @@ app.use(bodyParser.json());
 // connect to mongoose for an actual database login
 // Database configuration with mongoose
 mongoose.Promise = Promise;
-mongoose.connect("mongodb://heroku_plj4bc0k:r5fifdea9tm6og50k3iajreio7@ds119598.mlab.com:19598/heroku_plj4bc0k");
+mongoose.connect("mongodb://localhost/mern1")
+
+
 const db = mongoose.connection;
 
 // Show any mongoose errors

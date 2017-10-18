@@ -59,9 +59,17 @@ export default class Login extends React.Component {
                 <form className="form">
                     <input name="username" value={this.state.username} onChange={this.handleInputChange}/>
                     <input type="password" name="password" value={this.state.password} onChange={this.handleInputChange}/>
+                    <Link to={"api/users/" + this.state.username}>
                     <button onClick={this.submitForm}>LOGIN</button>
+                    </Link>
                 </form>
             </div>
         );
     }
 }
+
+                    // <Link to={"/books/" + book._id}>
+                    //   <strong>
+                    //     {book.title} by {book.author}
+                    //   </strong>
+                    // </Link>

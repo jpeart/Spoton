@@ -5,6 +5,9 @@ import { Button } from 'reactstrap';
 import './Login.css';
 import logo from '../../SpotOnLogo.svg';
 import logotext from '../../SpotOnText.svg';
+//import { Link } from "react-router-dom";
+import { Redirect } from 'react-router';
+
 
 export default class Login extends React.Component {
     constructor(props) {
@@ -43,6 +46,7 @@ export default class Login extends React.Component {
             instance
             .get('/api/users/' + this.state.username)
             .then(response=>console.log(response.data))
+            .then(this.setState({redirect: true}))
             .catch(err=>console.log(err))
             // instance.get('/api/users').then(response=>console.log(response.data)).catch(err=>console.log(err));
         })
@@ -59,6 +63,9 @@ export default class Login extends React.Component {
     }
 
     render() {
+      if (this.state.redirect) {
+        return <Redirect push to={"/users/" + this.state.username}/>;
+      } else {
         return (
             <div className="login-container">
                 <form className="form">
@@ -66,10 +73,13 @@ export default class Login extends React.Component {
                   <img src={logotext} className="App-logo-text" alt="logo-text" />
                     <Input name="username" value={this.state.username} onChange={this.handleInputChange} placeholder="Username" />
                     <Input type="password" name="password" value={this.state.password} onChange={this.handleInputChange} placeholder="Password" />
-                    <Button onClick={this.submitForm} color="danger">Log In</Button>
+                    <Button onClick={this.submitForm} color="danger">
+                    Log In
+                    </Button>
                     <div><a href="/login">[ TEMP LOGIN LINK ]</a></div>
                 </form>
             </div>
         );
+      }
     }
 }
