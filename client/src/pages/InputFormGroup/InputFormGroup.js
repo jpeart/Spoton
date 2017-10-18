@@ -14,7 +14,9 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import './InputFormGroup.css';
 import SVGChart from '../Viz/Viz1.js';
+import SVGChart2 from '../Viz/Viz2.js';
 import glucosedataimport from '../Viz/glucoseData.json'
+import glucosedataimport2 from '../Viz/glucoseData2.json'
 import axios from 'axios';
 
 // Select Options
@@ -22,6 +24,11 @@ const options = ["Make a selection:", "Wake", "Breakfast", "One hour after break
 //import chartData from './pages/Viz/data.tsv';
 
 const testdata = glucosedataimport;
+
+const testdata2 = glucosedataimport2;
+glucosedataimport2.forEach(function(d) { d.time = new Date(d.time * 1000); });
+
+
 const testwidth = 960;
 const testheight = 500;
 
@@ -48,11 +55,15 @@ class InputFormGroup extends Component {
     this.state = {
       dateTime: moment(),
       modal: false,
-      dropdownOpen: false
+      dropdownOpen: false,
+      viz1Visible: true,
+      viz2Visible: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.toggle = this.toggle.bind(this);
     this.modalToggle = this.modalToggle.bind(this);
+    this.viz1Visible = this.viz1Visible.bind(this);
+    this.viz2Visible = this.viz2Visible.bind(this);
   }
 
   toggle() {
@@ -84,6 +95,20 @@ class InputFormGroup extends Component {
   modalToggle() {
     this.setState({
       modal: !this.state.modal
+    });
+  }
+
+  viz1Visible() {
+    this.setState({
+      viz1Visible: true,
+      viz2Visible: false
+    });
+  }
+
+  viz2Visible() {
+    this.setState({
+      viz1Visible: false,
+      viz2Visible: true
     });
   }
 
@@ -166,20 +191,27 @@ class InputFormGroup extends Component {
         <div className="nav-container">
 
           <Button color="danger" onClick={this.modalToggle} className="nav-item rm-20">Add Reading</Button>
-          <Dropdown outline isOpen={this.state.dropdownOpen} toggle={this.toggle} className="nav-item">
+          <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle} className="nav-item" outline>
             <DropdownToggle outline caret>
               Dashboards
             </DropdownToggle>
             <DropdownMenu>
-              <DropdownItem>Dashboard #1</DropdownItem>
-              <DropdownItem>Dashboard #2</DropdownItem>
-              <DropdownItem>Dashboard #3</DropdownItem>
-              <DropdownItem>Dashboard #4</DropdownItem>
+              <DropdownItem onClick={this.viz1Visible}>Dashboard #1</DropdownItem>
+              <DropdownItem onClick={this.viz2Visible}>Dashboard #2</DropdownItem>               
             </DropdownMenu>
           </Dropdown>
     </div>
+    {
+          this.state.viz1Visible
+            ? <SVGChart2 data={testdata2} width={testwidth} height={testheight} />
+            : null
+          }
+    {
+          this.state.viz2Visible
+            ? <SVGChart data={testdata} width={testwidth} height={testheight} />
+            : null
+        }
 
-    <SVGChart data={testdata} width={testwidth} height={testheight}/>
     <div>
           <Modal isOpen={this.state.modal} toggle={this.modalToggle} className={this.props.className}>
           <ModalHeader toggle={this.modalToggle}>Readings Entry</ModalHeader>
