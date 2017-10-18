@@ -17,7 +17,7 @@ var ReadingsSchema = new Schema({
 	},
 	reading: {
 		type: Number,
-		trim: true
+		trim: true,
 		required: "Need a blood sugar reading to insert a reading"
 	},
 	note: {

@@ -43,11 +43,13 @@ export default class Login extends React.Component {
             // route and we can test this in postman to confirm whether or not
             // we need a token!
             // instance.get('/api/users').then(response=>console.log(response.data)).catch(err=>console.log(err));
-            instance
-            .get('/api/users/' + this.state.username)
-            .then(response=>console.log(response.data))
-            .then(this.setState({redirect: true}))
-            .catch(err=>console.log(err))
+            //instance
+            //.get('/api/users/' + this.state.username)
+            //.then(response=>console.log(response.data))
+            //.then(this.setState({redirect: true}))
+
+            this.setState({redirect: true})
+            //.catch(err=>console.log(err))
             // instance.get('/api/users').then(response=>console.log(response.data)).catch(err=>console.log(err));
         })
         .catch(error=> {
