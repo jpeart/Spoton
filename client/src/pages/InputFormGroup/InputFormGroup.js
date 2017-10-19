@@ -185,7 +185,7 @@ logout = (event) => {
         <h2 id="userheader">User: Don Frito</h2>
         <div className="nav-container">
 
-          <Button color="danger" onClick={this.modalToggle} className="nav-item rm-20">Add Reading</Button>
+          <Button color="info" onClick={this.modalToggle} className="nav-item rm-20">Add Reading</Button>
           <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle} className="nav-item rm-20" outline>
             <DropdownToggle outline caret>
               Dashboards
@@ -252,7 +252,7 @@ logout = (event) => {
             </Form>
           </ModalBody>
           <ModalFooter>
-            <Button color="danger" onClick={this.handleFormSubmit}>Submit</Button>{' '}
+            <Button color="info" onClick={this.handleFormSubmit}>Submit</Button>{' '}
             <Button color="secondary" onClick={this.modalToggle}>Cancel</Button>
           </ModalFooter>
         </Modal>
