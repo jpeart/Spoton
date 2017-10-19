@@ -272,7 +272,7 @@ logout = (event) => {
     </div>
     );
   }
-  }
+  
 }
 
 export default InputFormGroup;
