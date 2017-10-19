@@ -7,6 +7,8 @@ class SVGChart2 extends React.Component {
  
   render() {
     let data = this.props.data;
+    //data.forEach(function(d) { d.time = new Date(d.time * 1000); });
+    console.log(data);
 
     let margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = this.props.width - margin.left - margin.right,
@@ -24,30 +26,28 @@ class SVGChart2 extends React.Component {
       .append("g")
       .attr("transform", `translate(${margin.left},${margin.top})`);
 
-//var parseTime = d3.timeParse("%Y-%m-%dT%H:%M:%S");
-//data.forEach(function(d) { d.time = new Date(d.time * 1000); });
+//let parseTime = d3.utcParse("%Y-%m-%dT%H:%M:%S.%LZ");
 
-//console.log(data);
 
-var x = d3.scaleTime()
+let x = d3.scaleTime()
+
   .range([0, width]);
 
-var y = d3.scaleLinear()
+let y = d3.scaleLinear()
   .range([height, 0]);
 
-  var line = d3.line()
+  let line = d3.line()
   .x(function(data) { return x(data.time); })
   .y(function(data) { return y(data.reading); });
   
-    x.domain(d3.extent(data, function(d) { return d.time; }));
+    x.domain(d3.extent(data, function(d) { return (d.time); }));
     //y.domain([0, d3.max(data, function(d) { return d.reading; })]);
-    y.domain([0, 420]);
+    y.domain([0, 420]); //fixed Y axis
   
     svg.append("g")
         .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(x))
       .select(".domain")
-        //.remove();
   
     svg.append("g")
         .call(d3.axisLeft(y))
@@ -66,38 +66,13 @@ var y = d3.scaleLinear()
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
         .attr("stroke-width", 1.5)
-        .attr("d", line);*/
-  
-  
-  // Add the scatterplot   
- /* for (var i = 0; i < data.length; i++) {
-
-  if (data[i].reading>150)
-    var color="red";//less than 150 so make it red as this chunk is for less than 150
-  else 
-    var color="blue";//greater than 150 so make it blue as this chunk is for greater than 150
-    console.log(color);
-
-    svg.selectAll("dot")
-    .datum(data)
-    .enter().append("circle")
-    .attr("r", 3.5)
-    .style("fill", color)
-    .attr("cx", function(d) { return x(parseTime(d[i].time)); console.log(d[i].time); })
-    .attr("cy", function(d) { return y(d[i].reading); });
-  }*/
-  
-    /*svg.selectAll("dot")
-        .data(data)
-        .enter().append("circle")
-        .attr("r", 3.5)
-        .style("fill", "blue")
-        .attr("cx", function(d) { return x(d.time); })
-        .attr("cy", function(d) { return y(d.reading); }); */
-
+        .attr("d", line); */
+        
     data.forEach(function(data){//iterate through the chunks
-          //console.log("reading data = " + data.reading);
-          var color = "";
+
+          //console.log("date data= " + data.date);
+          let color = "";
+
           if (data.reading > 180 || data.reading < 70)
             color ="red";//less than 150 so make it red as this chunk is for less than 150
           else if (data.reading > 150 && data.reading < 180)
