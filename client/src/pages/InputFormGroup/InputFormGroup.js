@@ -81,6 +81,24 @@ class InputFormGroup extends Component {
       //.then(this.state.userData.forEach(function(d) { d.time = new Date(d.time * 1000); }))
   }
 
+  refreshInstance() {
+    const token = localStorage.getItem('token');
+    var instance = axios.create({
+        headers: {'Authorization': `Bearer ${token}`}
+    });
+    //console.log(instance);
+    var usr = this.props.location.pathname
+    var usrQuery = usr.substring(7,(usr.length));
+    //console.log(usrQuery);
+    instance
+      .get('/api/users/' + usrQuery)
+      .then(response => {
+        this.setState({ userData: response.data });
+      })
+      .catch(err => console.log(err))
+      //.then(this.state.userData.forEach(function(d) { d.time = new Date(d.time * 1000); }))
+  }
+
 
   modalToggle() {
     this.setState({
@@ -163,6 +181,8 @@ class InputFormGroup extends Component {
       carbs: "",
       bolus: ""
   })
+
+  this.refreshInstance();
 };
 
 logout = (event) => {
