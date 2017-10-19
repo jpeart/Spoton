@@ -11,8 +11,7 @@ module.exports = {
   },
   insertReading: function(req,res){
     //console.log(Date.parse(req.body.time));
-    req.body.time = Date.parse(req.body.time);
-    req.body.time = Math.floor(req.body.time / 1000); 
+    req.body.time = Date.parse(req.body.time); 
   	db.Readings
   	.create(req.body)
   	.then(dbModel => res.json(dbModel))
