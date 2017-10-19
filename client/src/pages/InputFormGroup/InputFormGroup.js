@@ -1,11 +1,5 @@
 import React, { Component } from "react";
-//import DeleteBtn from "../../components/DeleteBtn";
-//import SaveBtn from "../../components/SaveBtn";
-//import API from "../../utils/API";
-//import { Col, Row, Container } from "../../components/Grid";
-//import { List, ListItem } from "../../components/List";
 import { Input, FormBtn } from "../../components/Form";
-//import helpers from '../../utils/helpers';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import { Button, Form, FormGroup, Label, FormText, Col, Row, Container, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
@@ -181,14 +175,18 @@ logout = (event) => {
   //LIFECYCLE EVENT
   // jordan: Gave h2 an ID and manipulate it in ComponentDidMount();
   render() {
-    
+
+    if (this.state.redirect) {
+      return <Redirect push to={"/"}/>;
+    } else {
+
     return (
       <div>
         <h2 id="userheader">User: Don Frito</h2>
         <div className="nav-container">
 
           <Button color="danger" onClick={this.modalToggle} className="nav-item rm-20">Add Reading</Button>
-          <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle} className="nav-item" outline>
+          <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle} className="nav-item rm-20" outline>
             <DropdownToggle outline caret>
               Dashboards
             </DropdownToggle>
@@ -197,6 +195,7 @@ logout = (event) => {
               <DropdownItem onClick={this.viz2Visible}>Heatmap</DropdownItem>               
             </DropdownMenu>
           </Dropdown>
+          <Button color="danger" onClick={this.logout} classname="nav-item">Log Out</Button>
     </div>
     {
           this.state.viz1Visible
@@ -208,9 +207,7 @@ logout = (event) => {
             ? <SVGChart data={testdata} width={testwidth} height={testheight} />
             : null
         }
-    <div>
-      <Button color="danger" onClick={this.logout}>Log Out</Button>
-    </div>
+
     <div>
           <Modal isOpen={this.state.modal} toggle={this.modalToggle} className={this.props.className}>
           <ModalHeader toggle={this.modalToggle}>Readings Entry</ModalHeader>
@@ -263,6 +260,7 @@ logout = (event) => {
     </div>
     );
   }
+}
 
 //**************************** JORDAN's DUMBASS PATTERN RECOGNITION **********************************
 //====================================================================================================
@@ -334,23 +332,25 @@ for(let i=0; i<stuff.length; i++){
 
 //call showmethesugarfacts() for each category
 var addme = "";
-console.log(alertme[alertme.length-1]);
+//console.log(alertme[alertme.length-1]);
 for(let i=0;i<patterns.length; i++){
   if(patterns[i].length > 1){
     addme += this.showmethesugarfacts(patterns[i]);
-    if(addme)
-      alertme += addme;
   }
 }
 if(!addme)
   alertme += "No  negative patterns. Way to go! You must be Wilfred Brimley!";
+else
+  alertme += addme;
+
 alert(alertme);
 
 }//end findpatterns
 
 
 showmethesugarfacts(sugars){
-  console.log(sugars);
+console.log("sugars called for "+sugars[0]);
+console.log(sugars);
 var patternstring = "";
 //highs counter
 var highs = 0;
