@@ -19,6 +19,7 @@ import glucosedataimport from '../Viz/glucoseData.json'
 import glucosedataimport2 from '../Viz/glucoseData2.json'
 import * as d3 from 'd3'
 import axios from 'axios';
+import { Redirect } from 'react-router';
 
 // Select Options
 const options = ["Make a selection:", "Wake", "Breakfast", "One hour after breakfast", "Lunch", "One hour after lunch", "Dinner", "One hour after dinner", "Bed", "Prior to workout", "Post workout", "Snack", "One hour after snack", "Felt low", "Felt high", "Miscellaneous"];
@@ -84,6 +85,7 @@ class InputFormGroup extends Component {
       )
       .catch(err => console.log(err))
       //.then(this.state.userData.forEach(function(d) { d.time = new Date(d.time * 1000); }))
+
   }
 
 
@@ -132,14 +134,17 @@ class InputFormGroup extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    // console.log("Date:" + this.state.dateTime);
+
+    //console.log("Date:" + this.state.dateTime);
     // console.log("Category:" + this.state.category);
     // console.log("Reading:" + this.state.reading);
     // console.log("Carbs:" + this.state.carbs);
     // console.log("Bolus:" + this.state.bolus);
 
+
+
     //create reading object
-    var temp = { username: "", time: "", category: "", reading: 0, note: "", carbs: 0, bolus: 0 };
+    var temp = { username: "", time: 0, category: "", reading: 0, note: "", carbs: 0, bolus: 0 };
 
     // jordan: make the api call here
     const token = localStorage.getItem('token');
@@ -157,6 +162,7 @@ class InputFormGroup extends Component {
     temp.reading = this.state.reading;
     temp.carbs = this.state.carbs;
     temp.bolus = this.state.bolus;
+    console.log("time: "+temp.time);
 
     // make the api call
     instance
@@ -173,6 +179,11 @@ class InputFormGroup extends Component {
       bolus: ""
   })
 };
+
+logout = (event) => {
+  localStorage.setItem('token', 'logged out')
+  this.setState({redirect: true});
+}
 
 
 
@@ -206,7 +217,9 @@ class InputFormGroup extends Component {
             ? <SVGChart data={testdata} width={testwidth} height={testheight} />
             : null
         }
-
+    <div>
+      <Button color="danger" onClick={this.logout}>Log Out</Button>
+    </div>
     <div>
           <Modal isOpen={this.state.modal} toggle={this.modalToggle} className={this.props.className}>
           <ModalHeader toggle={this.modalToggle}>Readings Entry</ModalHeader>
@@ -258,6 +271,7 @@ class InputFormGroup extends Component {
       </div>
     </div>
     );
+  }
   }
 }
 

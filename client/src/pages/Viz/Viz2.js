@@ -28,7 +28,9 @@ class SVGChart2 extends React.Component {
 
 //let parseTime = d3.utcParse("%Y-%m-%dT%H:%M:%S.%LZ");
 
+
 let x = d3.scaleTime()
+
   .range([0, width]);
 
 let y = d3.scaleLinear()
@@ -67,8 +69,10 @@ let y = d3.scaleLinear()
         .attr("d", line); */
         
     data.forEach(function(data){//iterate through the chunks
+
           //console.log("date data= " + data.date);
           let color = "";
+
           if (data.reading > 180 || data.reading < 70)
             color ="red";//less than 150 so make it red as this chunk is for less than 150
           else if (data.reading > 150 && data.reading < 180)

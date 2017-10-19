@@ -10,7 +10,9 @@ module.exports = {
     .catch(err => res.status(422).json(err));
   },
   insertReading: function(req,res){
-    //console.log(req.body);
+    //console.log(Date.parse(req.body.time));
+    req.body.time = Date.parse(req.body.time);
+    req.body.time = Math.floor(req.body.time / 1000); 
   	db.Readings
   	.create(req.body)
   	.then(dbModel => res.json(dbModel))
