@@ -78,7 +78,6 @@ export default class Login extends React.Component {
                     <Button onClick={this.submitForm} color="danger">
                     Log In
                     </Button>
-                    <div><a href="/login">[ TEMP LOGIN LINK ]</a></div>
                 </form>
             </div>
         );
