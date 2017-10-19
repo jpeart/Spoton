@@ -32,7 +32,7 @@ const testwidth = 960;
 const testheight = 500;
 
 class InputFormGroup extends Component {
-<<<<<<< HEAD
+  
   componentDidMount() {
     //console.log("hello");
     // Jordan: Attach appropriate username to header
@@ -51,8 +51,6 @@ class InputFormGroup extends Component {
     searchTerm: "",
   };
 
-=======
->>>>>>> 585ecd0e6b323d37c2461de6f8761f0c03187c2c
   constructor (props) {
     super(props)
     this.state = {
@@ -70,18 +68,6 @@ class InputFormGroup extends Component {
     this.viz2Visible = this.viz2Visible.bind(this);
   }
 
-  componentDidMount() {
-    //console.log("hello");
-    // Jordan: Attach appropriate username to header
-    var usr = this.props.location.pathname
-    var usrName = usr.substring(7,(usr.length));
-    //console.log(usrName + " attached to header");
-    document.getElementById("userheader").innerHTML = "User: "+usrName;
-    this.getInstance();
-    //this.state.userData.forEach(function(d) { d.time = new Date(d.time * 1000); }); 
-  }
-
-
 
   toggle() {
     this.setState({
@@ -89,10 +75,6 @@ class InputFormGroup extends Component {
     });
   }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 585ecd0e6b323d37c2461de6f8761f0c03187c2c
   getInstance() {
     const token = localStorage.getItem('token');
     var instance = axios.create({
