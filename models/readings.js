@@ -8,8 +8,8 @@ var ReadingsSchema = new Schema({
 			required: "Username is Required"
 	},
 	time: {
-		type: Date,
-		default: Date.now
+		type: Number,
+		//default: Date.now
 	},
 	category: {
 			type: String,

@@ -17,39 +17,20 @@ import SVGChart from '../Viz/Viz1.js';
 import SVGChart2 from '../Viz/Viz2.js';
 import glucosedataimport from '../Viz/glucoseData.json'
 import glucosedataimport2 from '../Viz/glucoseData2.json'
+import * as d3 from 'd3'
 import axios from 'axios';
 
 // Select Options
 const options = ["Make a selection:", "Wake", "Breakfast", "One hour after breakfast", "Lunch", "One hour after lunch", "Dinner", "One hour after dinner", "Bed", "Prior to workout", "Post workout", "Snack", "One hour after snack", "Felt low", "Felt high", "Miscellaneous"];
-//import chartData from './pages/Viz/data.tsv';
-
 const testdata = glucosedataimport;
 
-const testdata2 = glucosedataimport2;
-glucosedataimport2.forEach(function(d) { d.time = new Date(d.time * 1000); });
-
+//glucosedataimport2.forEach(function(d) { d.time = new Date(d.time * 1000); });
+//const testdata2 = glucosedataimport2;
 
 const testwidth = 960;
 const testheight = 500;
 
 class InputFormGroup extends Component {
-  componentDidMount() {
-    //console.log("hello");
-    // Jordan: Attach appropriate username to header
-    var usr = this.props.location.pathname
-    var usrName = usr.substring(7,(usr.length));
-    //console.log(usrName + " attached to header");
-    document.getElementById("userheader").innerHTML = "User: "+usrName;
-    this.getInstance();
-  }
-  state = {
-    books: [],
-    title: "",
-    url: "",
-    results: [],
-    searchTerm: "",
-  };
-
   constructor (props) {
     super(props)
     this.state = {
@@ -57,7 +38,8 @@ class InputFormGroup extends Component {
       modal: false,
       dropdownOpen: false,
       viz1Visible: true,
-      viz2Visible: false
+      viz2Visible: false,
+      userData: []
     };
     this.handleChange = this.handleChange.bind(this);
     this.toggle = this.toggle.bind(this);
@@ -66,14 +48,24 @@ class InputFormGroup extends Component {
     this.viz2Visible = this.viz2Visible.bind(this);
   }
 
+  componentDidMount() {
+    //console.log("hello");
+    // Jordan: Attach appropriate username to header
+    var usr = this.props.location.pathname
+    var usrName = usr.substring(7,(usr.length));
+    //console.log(usrName + " attached to header");
+    document.getElementById("userheader").innerHTML = "User: "+usrName;
+    this.getInstance();
+    //this.state.userData.forEach(function(d) { d.time = new Date(d.time * 1000); }); 
+  }
+
+
+
   toggle() {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen
     });
   }
-
-
-
 
 
   getInstance() {
@@ -87,9 +79,12 @@ class InputFormGroup extends Component {
     //console.log(usrQuery);
     instance
       .get('/api/users/' + usrQuery)
-      .then(response=>console.log(response.data))
+      .then(response =>
+        this.setState({ userData: response.data })
+      )
+      .catch(err => console.log(err))
+      //.then(this.state.userData.forEach(function(d) { d.time = new Date(d.time * 1000); }))
   }
-
 
 
   modalToggle() {
@@ -184,7 +179,7 @@ class InputFormGroup extends Component {
   //LIFECYCLE EVENT
   // jordan: Gave h2 an ID and manipulate it in ComponentDidMount();
   render() {
-
+    
     return (
       <div>
         <h2 id="userheader">User: Don Frito</h2>
@@ -196,14 +191,14 @@ class InputFormGroup extends Component {
               Dashboards
             </DropdownToggle>
             <DropdownMenu>
-              <DropdownItem onClick={this.viz1Visible}>Dashboard #1</DropdownItem>
-              <DropdownItem onClick={this.viz2Visible}>Dashboard #2</DropdownItem>               
+              <DropdownItem onClick={this.viz1Visible}>Glucose Readings</DropdownItem>
+              <DropdownItem onClick={this.viz2Visible}>Heatmap</DropdownItem>               
             </DropdownMenu>
           </Dropdown>
     </div>
     {
           this.state.viz1Visible
-            ? <SVGChart2 data={testdata2} width={testwidth} height={testheight} />
+            ? <SVGChart2 data={this.state.userData} width={testwidth} height={testheight} />
             : null
           }
     {
