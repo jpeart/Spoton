@@ -18,6 +18,7 @@ import SVGChart2 from '../Viz/Viz2.js';
 import glucosedataimport from '../Viz/glucoseData.json'
 import glucosedataimport2 from '../Viz/glucoseData2.json'
 import axios from 'axios';
+import { Redirect } from 'react-router';
 
 // Select Options
 const options = ["Make a selection:", "Wake", "Breakfast", "One hour after breakfast", "Lunch", "One hour after lunch", "Dinner", "One hour after dinner", "Bed", "Prior to workout", "Post workout", "Snack", "One hour after snack", "Felt low", "Felt high", "Miscellaneous"];
@@ -87,7 +88,8 @@ class InputFormGroup extends Component {
     //console.log(usrQuery);
     instance
       .get('/api/users/' + usrQuery)
-      .then(response=> {console.log(response.data); console.log("time: " +response.data[0].time)})
+      .then(response=>console.log(response.data[0].username))
+
   }
 
 
@@ -183,12 +185,19 @@ class InputFormGroup extends Component {
   })
 };
 
+logout = (event) => {
+  localStorage.setItem('token', 'logged out')
+  this.setState({redirect: true});
+}
+
 
 
   //LIFECYCLE EVENT
   // jordan: Gave h2 an ID and manipulate it in ComponentDidMount();
   render() {
-
+    if (this.state.redirect) {
+      return <Redirect push to={"/"}/>;
+    } else {
     return (
       <div>
         <h2 id="userheader">User: Don Frito</h2>
@@ -201,7 +210,7 @@ class InputFormGroup extends Component {
             </DropdownToggle>
             <DropdownMenu>
               <DropdownItem onClick={this.viz1Visible}>Dashboard #1</DropdownItem>
-              <DropdownItem onClick={this.viz2Visible}>Dashboard #2</DropdownItem>               
+              <DropdownItem onClick={this.viz2Visible}>Dashboard #2</DropdownItem>
             </DropdownMenu>
           </Dropdown>
     </div>
@@ -215,7 +224,9 @@ class InputFormGroup extends Component {
             ? <SVGChart data={testdata} width={testwidth} height={testheight} />
             : null
         }
-
+    <div>
+      <Button color="danger" onClick={this.logout}>Log Out</Button>
+    </div>
     <div>
           <Modal isOpen={this.state.modal} toggle={this.modalToggle} className={this.props.className}>
           <ModalHeader toggle={this.modalToggle}>Readings Entry</ModalHeader>
@@ -267,6 +278,7 @@ class InputFormGroup extends Component {
       </div>
     </div>
     );
+  }
   }
 }
 
