@@ -32,7 +32,7 @@ const testwidth = 960;
 const testheight = 500;
 
 class InputFormGroup extends Component {
-  
+
   componentDidMount() {
     //console.log("hello");
     // Jordan: Attach appropriate username to header
@@ -305,7 +305,7 @@ findpatterns(stuff){
 //***********************************************************************************************************************************
 // ==================================================================================================================================
 //***********************************************************************************************************************************
-var alertme = "Hi "+stuff[0].username+",\n"+"Before Reading your graphs here are a few patterns we have found:\n \n";
+var alertme = "Hi "+stuff[0].username+",\n"+"Before Reading your graphs here are a few patterns we have found:\n\n";
 //how many readings per category? (week's worth for now)
 var pool = 7;
 
@@ -319,7 +319,7 @@ var patterns = new Array(categories.length);
 //loop each index
 for(let i=0; i<categories.length; i++){
   //make each index an array
-  patterns[i] = new Array(pool+1);
+  patterns[i] = new Array();
   //assign the first index of new array the name of the category
   patterns[i][0] = categories[i];
 }
@@ -340,20 +340,31 @@ for(let i=0; i<stuff.length; i++){
 }//end for loop
 
 //call showmethesugarfacts() for each category
+var addme = "";
+console.log(alertme[alertme.length-1]);
 for(let i=0;i<patterns.length; i++){
- alertme += this.showmethesugarfacts(patterns[i]);
+  if(patterns[i].length > 1){
+    addme += this.showmethesugarfacts(patterns[i]);
+    if(addme)
+      alertme += addme;
+  }
 }
+if(!addme)
+  alertme += "No negative patterns. Way to go! You must be Wilfred Brimley!";
 alert(alertme);
 
 }//end findpatterns
 
 
 showmethesugarfacts(sugars){
+  console.log(sugars);
 var patternstring = "";
 //highs counter
 var highs = 0;
 //lows counter
 var lows = 0;
+//avg 
+var avg = 0;
 //not enough readings to find a pattern
 if(sugars.length-1 < 3){
   console.log("No pattern, Not enough sugars for the "+sugars[0]+" category");
@@ -364,15 +375,20 @@ else{
   //find lows and highs
   for(let i=1;i<sugars.length; i++){
     //highs
-    if(sugars[i] > 170)
+    if(sugars[i] > 190)
       highs++;
     else if(sugars[i] < 75)
       lows++;
+    avg += sugars[i];
+    // console.log(sugars[i]);
+    // console.log("avg = "+avg);
   }
+
+  avg = Math.floor(avg / (sugars.length-1));
   if(highs >= 3)
-    patternstring += "There is a tendency to go high at "+sugars[0]+"\n";
+    patternstring += "There is a tendency to go high at "+sugars[0]+". Average = "+avg+"\n";
   else if(lows >= 3)
-    patternstring += "There is a tendency to go low at "+sugars[0]+"\n";
+    patternstring += "There is a tendency to go low at "+sugars[0]+". Average = "+avg+"\n";
   //else
   //   patternstring += "no bad patterns found for "+sugars[0];
 
