@@ -24,42 +24,83 @@ for (i = 0; i < days; i++) {
         temp.username = "Wilfred Brimley";
 
         if (j == 0) {
-            temp.time = new Date(2017, 10, 17, (Math.floor(Math.random() * (8 - 5)) + 5));
+            minhour = 5;
+            maxhour = 8;
+           // temp.time = new Date(2017, 9, 0, (Math.floor(Math.random() * (8 - 5) + 5)), 0);
+            temp.time = new Date(2017, 9, (11+i));
+            var hours=(Math.floor(Math.random() * (maxhour - minhour) + minhour));
+            temp.time.setHours(hours);
+            console.log("hours: "+hours);
+            console.log("date: "+ Date.parse(temp.time));
             temp.time = temp.time.getUnixTime();
+            console.log("unix time: "+temp.time);
             temp.category = "wake";
         }
         if (j == 1) {
-            temp.time = new Date(2017, 10, 17, (Math.floor(Math.random() * (9 - 7)) + 7));
+            minhour =5;
+            maxhour =8;
+           // temp.time = new Date(2017, 9, 0, (Math.floor(Math.random() * (9 - 7) + 7)), 0);
+            temp.time = new Date(2017, 9, (11+i));
+            var hours=(Math.floor(Math.random() * (maxhour - minhour) + minhour));
+            temp.time.setHours(hours);
             temp.time = temp.time.getUnixTime();
             temp.category = "breakfast"
         }
         if (j == 2) {
-            temp.time = new Date(2017, 10, 17, (Math.floor(Math.random() * (10 - 8)) + 8));
+            minhour=8;
+            maxhour=10;
+           // temp.time = new Date(2017, 9, i, (Math.floor(Math.random() * (10 - 8) + 8)), 0);
+            temp.time = new Date(2017, 9, (11+i));
+            var hours=(Math.floor(Math.random() * (maxhour - minhour) + minhour));
+            temp.time.setHours(hours);
             temp.time = temp.time.getUnixTime();
             temp.category = "afterbreakfast"
         }
         if (j == 3) {
-            temp.time = new Date(2017, 10, 17, (Math.floor(Math.random() * (15 - 12)) + 12));
+            minhour=12;
+            maxhour=15;
+            temp.time = new Date(2017, 9, (11+i));
+            var hours=(Math.floor(Math.random() * (maxhour - minhour) + minhour));
+            temp.time.setHours(hours);
             temp.time = temp.time.getUnixTime();
             temp.category = "lunch"
         }
         if (j == 4) {
-            temp.time = new Date(2017, 10, 17, (Math.floor(Math.random() * (16 - 13)) + 13));
+            minhour=13;
+            maxhour=16;
+            //temp.time = new Date(2017, 9, i, (Math.floor(Math.random() * (16 - 13) + 13)), 0);
+            temp.time = new Date(2017, 9, (11+i));
+            var hours=(Math.floor(Math.random() * (maxhour - minhour) + minhour));
+            temp.time.setHours(hours);
             temp.time = temp.time.getUnixTime();
             temp.category = "afterlunch"
         }
         if (j == 5) {
-            temp.time = new Date(2017, 10, 17, (Math.floor(Math.random() * (17 - 20)) + 17));
+            minhour=17;
+            maxhour=20;
+            //temp.time = new Date(2017, 9, i, (Math.floor(Math.random() * (17 - 20) + 17)), 0);
+            temp.time = new Date(2017, 9, (11+i));
+            var hours=(Math.floor(Math.random() * (maxhour - minhour) + minhour));
+            temp.time.setHours(hours);
             temp.time = temp.time.getUnixTime();
             temp.category = "dinner"
         }
         if (j == 6) {
-            temp.time = new Date(2017, 10, 17, (Math.floor(Math.random() * (21 - 18)) + 18));
+            minhour=18;
+            maxhour=21;
+            //temp.time = new Date(2017, 9, i, (Math.floor(Math.random() * (21 - 18) + 18)), 0);
+            temp.time = new Date(2017, 9, (11+i));
+            var hours=(Math.floor(Math.random() * (maxhour - minhour) + minhour));
+            temp.time.setHours(hours);
             temp.time = temp.time.getUnixTime();
             temp.category = "afterdinner"
         }
         if (j == 7) {
-            temp.time = new Date(2017, 10, 17, (Math.floor(Math.random() * (25 - 20)) + 20));
+            minhour=20;
+            maxhour=25;
+            temp.time = new Date(2017, 9, (11+i));
+            var hours=(Math.floor(Math.random() * (maxhour - minhour) + minhour));
+            temp.time.setHours(hours);
             temp.time = temp.time.getUnixTime();
             temp.category = "bedtime"
         }

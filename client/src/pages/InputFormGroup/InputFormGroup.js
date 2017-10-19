@@ -87,7 +87,7 @@ class InputFormGroup extends Component {
     //console.log(usrQuery);
     instance
       .get('/api/users/' + usrQuery)
-      .then(response=>console.log(response.data))
+      .then(response=> {console.log(response.data); console.log("time: " +response.data[0].time)})
   }
 
 
@@ -137,14 +137,17 @@ class InputFormGroup extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    // console.log("Date:" + this.state.dateTime);
+
+    //console.log("Date:" + this.state.dateTime);
     // console.log("Category:" + this.state.category);
     // console.log("Reading:" + this.state.reading);
     // console.log("Carbs:" + this.state.carbs);
     // console.log("Bolus:" + this.state.bolus);
 
+
+
     //create reading object
-    var temp = { username: "", time: "", category: "", reading: 0, note: "", carbs: 0, bolus: 0 };
+    var temp = { username: "", time: 0, category: "", reading: 0, note: "", carbs: 0, bolus: 0 };
 
     // jordan: make the api call here
     const token = localStorage.getItem('token');
@@ -162,6 +165,7 @@ class InputFormGroup extends Component {
     temp.reading = this.state.reading;
     temp.carbs = this.state.carbs;
     temp.bolus = this.state.bolus;
+    console.log("time: "+temp.time);
 
     // make the api call
     instance
