@@ -7,10 +7,6 @@ mongoose.connect(
         useMongoClient: true
     }
 );
-Date.prototype.getUnixTime = function() { return this.getTime()/1000|0 };
-if(!Date.now) Date.now = function() { return new Date(); }
-Date.time = function() { return Date.now().getUnixTime(); }
-
 var SugarSeed = [];
 
 //Wilfred Brimley  perfect
@@ -32,7 +28,7 @@ for (i = 0; i < days; i++) {
             temp.time.setHours(hours);
             console.log("hours: "+hours);
             console.log("date: "+ Date.parse(temp.time));
-            temp.time = temp.time.getUnixTime();
+            temp.time = Date.parse(temp.time);
             console.log("unix time: "+temp.time);
             temp.category = "wake";
         }
@@ -43,7 +39,7 @@ for (i = 0; i < days; i++) {
             temp.time = new Date(2017, 9, (11+i));
             var hours=(Math.floor(Math.random() * (maxhour - minhour) + minhour));
             temp.time.setHours(hours);
-            temp.time = temp.time.getUnixTime();
+            temp.time = Date.parse(temp.time);
             temp.category = "breakfast"
         }
         if (j == 2) {
@@ -53,7 +49,7 @@ for (i = 0; i < days; i++) {
             temp.time = new Date(2017, 9, (11+i));
             var hours=(Math.floor(Math.random() * (maxhour - minhour) + minhour));
             temp.time.setHours(hours);
-            temp.time = temp.time.getUnixTime();
+            temp.time = Date.parse(temp.time);
             temp.category = "afterbreakfast"
         }
         if (j == 3) {
@@ -62,7 +58,7 @@ for (i = 0; i < days; i++) {
             temp.time = new Date(2017, 9, (11+i));
             var hours=(Math.floor(Math.random() * (maxhour - minhour) + minhour));
             temp.time.setHours(hours);
-            temp.time = temp.time.getUnixTime();
+            temp.time = Date.parse(temp.time);
             temp.category = "lunch"
         }
         if (j == 4) {
@@ -72,7 +68,7 @@ for (i = 0; i < days; i++) {
             temp.time = new Date(2017, 9, (11+i));
             var hours=(Math.floor(Math.random() * (maxhour - minhour) + minhour));
             temp.time.setHours(hours);
-            temp.time = temp.time.getUnixTime();
+            temp.time = Date.parse(temp.time);
             temp.category = "afterlunch"
         }
         if (j == 5) {
@@ -82,7 +78,7 @@ for (i = 0; i < days; i++) {
             temp.time = new Date(2017, 9, (11+i));
             var hours=(Math.floor(Math.random() * (maxhour - minhour) + minhour));
             temp.time.setHours(hours);
-            temp.time = temp.time.getUnixTime();
+            temp.time = Date.parse(temp.time);
             temp.category = "dinner"
         }
         if (j == 6) {
@@ -92,7 +88,7 @@ for (i = 0; i < days; i++) {
             temp.time = new Date(2017, 9, (11+i));
             var hours=(Math.floor(Math.random() * (maxhour - minhour) + minhour));
             temp.time.setHours(hours);
-            temp.time = temp.time.getUnixTime();
+            temp.time = Date.parse(temp.time);
             temp.category = "afterdinner"
         }
         if (j == 7) {
@@ -101,7 +97,7 @@ for (i = 0; i < days; i++) {
             temp.time = new Date(2017, 9, (11+i));
             var hours=(Math.floor(Math.random() * (maxhour - minhour) + minhour));
             temp.time.setHours(hours);
-            temp.time = temp.time.getUnixTime();
+            temp.time = Date.parse(temp.time);
             temp.category = "bedtime"
         }
 
@@ -133,42 +129,42 @@ for (i = 0; i < days; i++) {
 
         if (j == 0) {
             temp.time = new Date(2017, 10, 17, (Math.floor(Math.random() * (8 - 5)) + 5));
-            temp.time = temp.time.getUnixTime();
+            temp.time = Date.parse(temp.time);
             temp.category = "wake";
         }
         if (j == 1) {
             temp.time = new Date(2017, 10, 17, (Math.floor(Math.random() * (9 - 7)) + 7));
-            temp.time = temp.time.getUnixTime();
+            temp.time = Date.parse(temp.time);
             temp.category = "breakfast"
         }
         if (j == 2) {
             temp.time = new Date(2017, 10, 17, (Math.floor(Math.random() * (10 - 8)) + 8));
-            temp.time = temp.time.getUnixTime();
+            temp.time = Date.parse(temp.time);
             temp.category = "afterbreakfast"
         }
         if (j == 3) {
             temp.time = new Date(2017, 10, 17, (Math.floor(Math.random() * (15 - 12)) + 12));
-            temp.time = temp.time.getUnixTime();
+            temp.time = Date.parse(temp.time);
             temp.category = "lunch"
         }
         if (j == 4) {
             temp.time = new Date(2017, 10, 17, (Math.floor(Math.random() * (16 - 13)) + 13));
-            temp.time = temp.time.getUnixTime();
+            temp.time = Date.parse(temp.time);
             temp.category = "afterlunch"
         }
         if (j == 5) {
             temp.time = new Date(2017, 10, 17, (Math.floor(Math.random() * (17 - 20)) + 17));
-            temp.time = temp.time.getUnixTime();
+            temp.time = Date.parse(temp.time);
             temp.category = "dinner"
         }
         if (j == 6) {
             temp.time = new Date(2017, 10, 17, (Math.floor(Math.random() * (21 - 18)) + 18));
-            temp.time = temp.time.getUnixTime();
+            temp.time = Date.parse(temp.time);
             temp.category = "afterdinner"
         }
         if (j == 7) {
             temp.time = new Date(2017, 10, 17, (Math.floor(Math.random() * (25 - 20)) + 20));
-            temp.time = temp.time.getUnixTime();
+            temp.time = Date.parse(temp.time);
             temp.category = "bedtime"
         }
 
@@ -201,42 +197,42 @@ for (i = 0; i < days; i++) {
 
         if (j == 0) {
             temp.time = new Date(2017, 10, 17, (Math.floor(Math.random() * (8 - 5)) + 5));
-            temp.time = temp.time.getUnixTime();
+            temp.time = Date.parse(temp.time);
             temp.category = "wake";
         }
         if (j == 1) {
             temp.time = new Date(2017, 10, 17, (Math.floor(Math.random() * (9 - 7)) + 7));
-            temp.time = temp.time.getUnixTime();
+            temp.time = Date.parse(temp.time);
             temp.category = "breakfast"
         }
         if (j == 2) {
             temp.time = new Date(2017, 10, 17, (Math.floor(Math.random() * (10 - 8)) + 8));
-            temp.time = temp.time.getUnixTime();
+            temp.time = Date.parse(temp.time);
             temp.category = "afterbreakfast"
         }
         if (j == 3) {
             temp.time = new Date(2017, 10, 17, (Math.floor(Math.random() * (15 - 12)) + 12));
-            temp.time = temp.time.getUnixTime();
+            temp.time = Date.parse(temp.time);
             temp.category = "lunch"
         }
         if (j == 4) {
             temp.time = new Date(2017, 10, 17, (Math.floor(Math.random() * (16 - 13)) + 13));
-            temp.time = temp.time.getUnixTime();
+            temp.time = Date.parse(temp.time);
             temp.category = "afterlunch"
         }
         if (j == 5) {
             temp.time = new Date(2017, 10, 17, (Math.floor(Math.random() * (20 - 17)) + 17));
-            temp.time = temp.time.getUnixTime();
+            temp.time = Date.parse(temp.time);
             temp.category = "dinner"
         }
         if (j == 6) {
             temp.time = new Date(2017, 10, 17, (Math.floor(Math.random() * (21 - 18)) + 18));
-            temp.time = temp.time.getUnixTime();
+            temp.time = Date.parse(temp.time);
             temp.category = "afterdinner"
         }
         if (j == 7) {
             temp.time = new Date(2017, 10, 17, (Math.floor(Math.random() * (25 - 20)) + 20));
-            temp.time = temp.time.getUnixTime();
+            temp.time = Date.parse(temp.time);
             temp.category = "bedtime"
         }
 
