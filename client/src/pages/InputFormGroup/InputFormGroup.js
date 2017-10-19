@@ -301,12 +301,13 @@ var alertme = "Hi "+stuff[0].username+",\n"+"Before Reading your graphs here are
 var pool = 7;
 
 // array of categories
-var categories =  ["wake", "breakfast", "1 hr after breakfast", "lunch", "1 hr after lunch", "dinner", "1 hr after dinner",
-"bed", "prior to workout", "post workout", "snack", "1 hr after snack", "felt low", "felt high", "miscellaneous"];
+var categories =  ["wake", "breakfast", "afterbreakfast", "lunch", "afterlunch", "dinner", "afterdinner",
+"bed", "prior to workout", "post workout", "snack", "aftersnack", "felt low", "felt high", "miscellaneous"];
 
 //make 2 dimentional array where [i][0] = name of category
 var patterns = new Array(categories.length);
 
+console.log("stuff: "+ stuff);
 //loop each index
 for(let i=0; i<categories.length; i++){
   //make each index an array
@@ -334,6 +335,7 @@ for(let i=0; i<stuff.length; i++){
 var addme = "";
 //console.log(alertme[alertme.length-1]);
 for(let i=0;i<patterns.length; i++){
+  console.log("sugar by category: " + patterns[i]);
   if(patterns[i].length > 1){
     addme += this.showmethesugarfacts(patterns[i]);
   }
@@ -349,8 +351,8 @@ alert(alertme);
 
 
 showmethesugarfacts(sugars){
-console.log("sugars called for "+sugars[0]);
-console.log(sugars);
+//console.log("sugars called for "+sugars[0]);
+//console.log(sugars);
 var patternstring = "";
 //highs counter
 var highs = 0;
