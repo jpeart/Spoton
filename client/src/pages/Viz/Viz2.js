@@ -27,7 +27,7 @@ class SVGChart2 extends React.Component {
 //var parseTime = d3.timeParse("%Y-%m-%dT%H:%M:%S");
 //data.forEach(function(d) { d.time = new Date(d.time * 1000); });
 
-console.log(data);
+//console.log(data);
 
 var x = d3.scaleTime()
   .range([0, width]);
@@ -96,7 +96,7 @@ var y = d3.scaleLinear()
         .attr("cy", function(d) { return y(d.reading); }); */
 
     data.forEach(function(data){//iterate through the chunks
-          console.log("reading data = " + data.reading);
+          //console.log("reading data = " + data.reading);
           var color = "";
           if (data.reading > 180 || data.reading < 70)
             color ="red";//less than 150 so make it red as this chunk is for less than 150
