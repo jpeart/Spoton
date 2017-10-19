@@ -43,14 +43,7 @@ class InputFormGroup extends Component {
 
     this.getInstance();
   }
-  state = {
-    books: [],
-    title: "",
-    url: "",
-    results: [],
-    searchTerm: "",
-  };
-
+  
   constructor (props) {
     super(props)
     this.state = {
@@ -166,7 +159,7 @@ class InputFormGroup extends Component {
     instance
       //.post('/api/users/' + usrQuery, function(req, res){res.send(temp)})
       .post('/api/users/'+usrQuery, temp)
-      .then(response=>console.log(response.data))
+      .then(response=> console.log(response.data))
 
     this.modalToggle();
     this.setState({
@@ -350,7 +343,7 @@ for(let i=0;i<patterns.length; i++){
   }
 }
 if(!addme)
-  alertme += "No negative patterns. Way to go! You must be Wilfred Brimley!";
+  alertme += "No  negative patterns. Way to go! You must be Wilfred Brimley!";
 alert(alertme);
 
 }//end findpatterns
