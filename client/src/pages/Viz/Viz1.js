@@ -7,15 +7,13 @@ class SVGChart extends React.Component {
  
   render() {
     let data = this.props.data;
-    //console.log(data);
+
  
     let margin = {top: 20, right: 20, bottom: 30, left: 40},
       width = this.props.width - margin.left - margin.right,
       height = this.props.height - margin.top - margin.bottom;
-    //console.log(width);
-    //console.log(height);
- 
-    //var x = d3.time.scale()
+
+
     let x = d3.scaleLinear()
     .domain([0, 24])
     .rangeRound([0, width])

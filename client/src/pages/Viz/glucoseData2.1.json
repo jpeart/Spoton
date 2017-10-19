@@ -1,0 +1,98 @@
+[
+  {
+    "_id": {
+        "$oid": "59e6b2dc26ef160c94496a3c"
+    },
+    "username": "Wilfred Brimley",
+    "time": 1510923600,
+    "category": "wake",
+    "reading": 147,
+    "note": "Test 1 of Day 1",
+    "carbs": 0,
+    "bolus": 0
+  },
+  {
+    "_id": {
+        "$oid": "59e6b2dc26ef160c94496a3d"
+    },
+    "username": "Wilfred Brimley",
+    "time": 1510927200,
+    "category": "breakfast",
+    "reading": 93,
+    "note": "Test 2 of Day 1",
+    "carbs": 60,
+    "bolus": 10
+  },
+  {
+    "_id": {
+        "$oid": "59e6b2dc26ef160c94496a3e"
+    },
+    "username": "Wilfred Brimley",
+    "time": 1510931200,
+    "category": "afterbreakfast",
+    "reading": 155,
+    "note": "Test 3 of Day 1",
+    "carbs": 0,
+    "bolus": 0
+  },
+  {
+    "_id": {
+        "$oid": "59e6b2dc26ef160c94496a3f"
+    },
+    "username": "Wilfred Brimley",
+    "time": 1510945200,
+    "category": "lunch",
+    "reading": 87,
+    "note": "Test 4 of Day 1",
+    "carbs": 60,
+    "bolus": 10
+  },
+  {
+    "_id": {
+        "$oid": "59e6b2dc26ef160c94496a40"
+    },
+    "username": "Wilfred Brimley",
+    "time": 1510948800,
+    "category": "afterlunch",
+    "reading": 169,
+    "note": "Test 5 of Day 1",
+    "carbs": 0,
+    "bolus": 0
+  },
+  {
+    "_id": {
+        "$oid": "59e6b2dc26ef160c94496a41"
+    },
+    "username": "Wilfred Brimley",
+    "time": 1510959800,
+    "category": "dinner",
+    "reading": 174,
+    "note": "Test 6 of Day 1",
+    "carbs": 60,
+    "bolus": 10
+  },
+  {
+    "_id": {
+        "$oid": "59e6b2dc26ef160c94496a42"
+    },
+    "username": "Wilfred Brimley",
+    "time": 1510970400,
+    "category": "afterdinner",
+    "reading": 176,
+    "note": "Test 7 of Day 1",
+    "carbs": 0,
+    "bolus": 0
+  },
+  {
+    "_id": {
+        "$oid": "59e6b2dc26ef160c94496a43"
+    },
+    "username": "Wilfred Brimley",
+    "time": 1510984800,
+    "category": "bedtime",
+    "reading": 174,
+    "note": "Test 8 of Day 1",
+    "carbs": 0,
+    "bolus": 0
+  }
+]
