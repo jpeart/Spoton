@@ -41,6 +41,7 @@ class InputFormGroup extends Component {
     var usrName = usr.substring(7,(usr.length));
     //console.log(usrName + " attached to header");
     document.getElementById("userheader").innerHTML = "User: "+usrName;
+
     this.getInstance();
   }
   state = {
@@ -73,10 +74,6 @@ class InputFormGroup extends Component {
     });
   }
 
-
-
-
-
   getInstance() {
     const token = localStorage.getItem('token');
     var instance = axios.create({
@@ -88,10 +85,8 @@ class InputFormGroup extends Component {
     //console.log(usrQuery);
     instance
       .get('/api/users/' + usrQuery)
-      .then(response=>console.log(response.data[0].username))
-
+      .then(response=> { console.log(response.data); this.findpatterns(response.data) })
   }
-
 
 
   modalToggle() {
@@ -139,14 +134,6 @@ class InputFormGroup extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-
-    //console.log("Date:" + this.state.dateTime);
-    // console.log("Category:" + this.state.category);
-    // console.log("Reading:" + this.state.reading);
-    // console.log("Carbs:" + this.state.carbs);
-    // console.log("Bolus:" + this.state.bolus);
-
-
 
     //create reading object
     var temp = { username: "", time: 0, category: "", reading: 0, note: "", carbs: 0, bolus: 0 };
@@ -280,6 +267,126 @@ logout = (event) => {
     );
   }
   }
+
+//**************************** JORDAN's DUMBASS PATTERN RECOGNITION **********************************
+//====================================================================================================
+
+findpatterns(stuff){
+//************************************************************************************************************************************
+//====================================================================================================================================
+//************************************************************************************************************************************
+
+//sent an array of "readings" { username: "",
+//  time: Timestamp,
+  // wake, breakfast, 1 hr after breakfast, lunch, 1 hr after lunch, dinner, 1 hr after dinner
+  // bed, prior to workout, post workout, snack, 1 hr after snack, felt low, felt high,
+  // Miscellaneous 
+  // 14 categories
+//  category: String,
+//  usertime: Timestamp,
+//  reading: Number,
+//  note: String,
+//  carbs: Number,
+//  bolus: Number
+//3 or more of similar readings to signify a pattern
+//todo later: save patterns to database, check to see if improvements made
+
+//counter? throw similar in a separate array? 
+//cant group by time (not a control group) so have to use category
+
+//throw each reading in an array based on its category 
+//(loop through readings array N times where N = # of categories) 
+//can do better? (loop through readings once by pushing to temp based on category)
+//( N if statements =/ ) 
+
+//***********************************************************************************************************************************
+// ==================================================================================================================================
+//***********************************************************************************************************************************
+var alertme = "Hi "+stuff[0].username+",\n"+"Before Reading your graphs here are a few patterns we have found:\n \n";
+//how many readings per category? (week's worth for now)
+var pool = 7;
+
+// array of categories
+var categories =  ["wake", "breakfast", "1 hr after breakfast", "lunch", "1 hr after lunch", "dinner", "1 hr after dinner",
+"bed", "prior to workout", "post workout", "snack", "1 hr after snack", "felt low", "felt high", "miscellaneous"];
+
+//make 2 dimentional array where [i][0] = name of category
+var patterns = new Array(categories.length);
+
+//loop each index
+for(let i=0; i<categories.length; i++){
+  //make each index an array
+  patterns[i] = new Array(pool+1);
+  //assign the first index of new array the name of the category
+  patterns[i][0] = categories[i];
+}
+  
+//put readings in their respective arrays
+
+// for each reading
+for(let i=0; i<stuff.length; i++){
+  // check its category
+  for(let j=0; j<categories.length; j++){
+    //push it to corresponding array
+    if(stuff[i].category == categories[j]){
+      patterns[j].push(stuff[i].reading);
+      // dont do more work than needed
+      break;
+    }//end if statement
+  }//end j loop
+}//end for loop
+
+//call showmethesugarfacts() for each category
+for(let i=0;i<patterns.length; i++){
+ alertme += this.showmethesugarfacts(patterns[i]);
+}
+alert(alertme);
+
+}//end findpatterns
+
+
+showmethesugarfacts(sugars){
+var patternstring = "";
+//highs counter
+var highs = 0;
+//lows counter
+var lows = 0;
+//not enough readings to find a pattern
+if(sugars.length-1 < 3){
+  console.log("No pattern, Not enough sugars for the "+sugars[0]+" category");
+  return;
+}
+//atleast 3 readings
+else{
+  //find lows and highs
+  for(let i=1;i<sugars.length; i++){
+    //highs
+    if(sugars[i] > 170)
+      highs++;
+    else if(sugars[i] < 75)
+      lows++;
+  }
+  if(highs >= 3)
+    patternstring += "There is a tendency to go high at "+sugars[0]+"\n";
+  else if(lows >= 3)
+    patternstring += "There is a tendency to go low at "+sugars[0]+"\n";
+  //else
+  //   patternstring += "no bad patterns found for "+sugars[0];
+
+  // //no patterns
+  // if(!patternstring)
+  //   patternstring="You have no known bad patterns! woo";
+
+  return patternstring;
+  
+  }//end else
+}//end showmethesugarfacts()
+
+//*******************************************************************************************************
+//=======================================================================================================
+
+
+
 }
 
 export default InputFormGroup;
